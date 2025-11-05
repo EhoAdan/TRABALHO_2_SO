@@ -64,10 +64,26 @@ class MemoryManager: # Tá me faltando um desses kkkkk
 
         if pid in self.processes:
             return f"Erro: Processo com PID {pid} já existe."
-        if size <= 0:
+        if size < 0:
             return "Erro: Tamanho do processo deve ser positivo."
-        if size > self.max_process_size:
-            return f"Erro: Tamanho {size} bytes excede o máximo de {self.max_process_size} bytes."
+        if size == 0:
+            return "Erro: Tamanho do processo não pode ser nulo."
+        while size > self.max_process_size:
+            print(f"Erro: Tamanho {size} bytes excede o máximo de {self.max_process_size} bytes.")
+            print(f"Digite 0 para sair.")
+            size_str = input(f"Digite um novo tamanho para o processo (máximo {self.max_process_size} bytes): ")
+            try:
+                if 'k' in size_str.lower():
+                    size = int(size_str.lower().replace('k', '')) * 1024
+                else:
+                    size = int(size_str)
+                if size < 0:
+                    print("Erro: O valor do tamanho deve ser positivo.")
+                if size == 0:
+                    print(self.processes)
+                    break
+            except ValueError:
+                print("Erro: Tamanho inválido. Digite um número inteiro.")
 
         num_pages_needed = math.ceil(size / self.page_size)
         if num_pages_needed > len(self.free_frames):
@@ -169,7 +185,7 @@ def main_loop():
         print(" 3. Visualizar Tabela de Páginas de um Processo")
         print(" 4. Sair")
         choice = input("Escolha uma opção (1-4): ")
-        
+
         if choice == '1':
             manager.view_memory()
         elif choice == '2':
