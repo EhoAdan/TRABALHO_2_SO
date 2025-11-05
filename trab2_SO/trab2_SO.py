@@ -41,7 +41,7 @@ class MemoryManager: # Tá me faltando um desses kkkkk
 
         print(f"Memória Livre: {free_count}/{self.total_frames} quadros ({free_perc:.2f}%)")
         print(f"Memória Usada: {used_count}/{self.total_frames} quadros")
-        print("-" * 40)
+        print("------------------------------------------")
 
         frame_map = {}
 
