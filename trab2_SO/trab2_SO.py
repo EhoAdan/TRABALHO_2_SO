@@ -14,7 +14,7 @@ class Process:
         # Memória Lógica com valores aleatórios
         self.logical_memory = bytearray(random.getrandbits(8) for _ in range(size))
 
-class MemoryManager: # Tá me faltando um desses kkkkk
+class MemoryManager:
 
 
     def __init__(self, physical_size, page_size, max_proc_size):
@@ -155,6 +155,8 @@ def get_validated_input(prompt_message, must_be_power_of_two=True):
 
 def main_loop():
 
+    # Prints e pega dados
+
     print("--- Simulador de Gerenciamento de Memória com Paginação ---")
     print("\nBem-vindo! Por favor, defina as configurações da sua memória.")
     print("Nota: Os tamanhos de memória e página devem ser potências de 2.")
@@ -176,8 +178,12 @@ def main_loop():
     print(f" Total de Quadros Físicos: {total_frames}")
     print("----------------------------------------------------------")
 
+    # Cria manager
+
     manager = MemoryManager(physical_memory_size, page_size, max_process_size)
     
+    # Simula a interface
+
     while True:
         print("\nOpções:")
         print(" 1. Visualizar Memória Física")
